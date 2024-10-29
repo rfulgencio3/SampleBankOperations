@@ -8,6 +8,7 @@ O objetivo do projeto é servir como uma referência para a construção de sist
 * [Operações Bancárias Implementadas](opercacoes-bancarias-implementadas)
 * [Uso de Delegates](uso-de-delegates)
 * [Execução](execucao)
+* [Melhorias](melhorias)
 * [Licença](licenca)
 
 ## Estrutura do Projeto
@@ -133,5 +134,21 @@ dotnet run --project SampleBankOperations.App
 ### Interagir com o Menu:
 Ao executar, um menu será exibido com as opções de operações bancárias. Selecione uma operação para realizar ações como depósito, saque ou consulta de saldo.
 
+## Melhorias
+Melhorias para implementação no projeto
+
+- [ ] Inclusão de projeto de testes unitários
+- [ ] Realizar _CodeCoverage_ de 80%
+- [ ] Implementar tipo de conta
+- [ ] Implementar design pattern _strategy_ para criar lógica de debito de valores em transferencias dependendo do tipo de conta
+- [ ] Configurar persistência de dados utilizando EFCore
+- [ ] Persistir dados em banco de dados postgres
+- [ ] Implementar objeto de dados da conta
+- [ ] Realizar configuração de chache redis de 1h para consulta de dados da conta (exceto salário)
+- [ ] Configurar publicação de eventos para fila `sbo-account-created` via RabbitMq
+- [ ] Configurar novo objeto para consulta de ações
+- [ ] Configurar requisição via RestSharp em api pública para busca de valor de ação pelo ticker [Yahoo Finance API](https://developer.yahoo.com/sign-in-with-yahoo/?guccounter=1&guce_referrer=aHR0cHM6Ly9kZXZlbG9wZXIueWFob28uY29tL2FwaS8&guce_referrer_sig=AQAAAAwD6lwEWhW8bZ_nbASrr8hyPkGFSbyHoXkGbul8Snpf7mz5-I4S0x9yDhuLA-O1c_qrHA-Ii4w2EVrTKuU3hkxq9ktRv3y1HQ3pmhs1oLRDbOnKyPtAN3chIGRm_ALpY-cKCnal75xy3j9L4broTGOQTpAvOslpH9LSXw-bQcR2#overview)
+- [ ] Orquestrar serviços de infra em arquivo docker-compose
+- [ ] Conteinerizar aplicação `.dockerfile`
 ## Licença
 Este projeto é licenciado sob a MIT License. Isso permite uso, modificação e distribuição, desde que a licença original seja incluída em qualquer redistribuição.
