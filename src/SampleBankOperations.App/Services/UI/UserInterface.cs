@@ -29,14 +29,14 @@ public class UserInterface
     {
         while (true)
         {
-            Console.WriteLine("Welcome to SampleBankOperations! Choose an option:");
-            Console.WriteLine("1. Open Account");
-            Console.WriteLine("2. Get Balance");
-            Console.WriteLine("3. Deposit");
-            Console.WriteLine("4. Withdraw");
-            Console.WriteLine("5. Transfer Between Accounts");
-            Console.WriteLine("6. Calculate Interest");
-            Console.WriteLine("9. Exit");
+            Console.WriteLine("Bem-vindo ao SampleBankOperations! Escolha uma opção:");
+            Console.WriteLine("1. Abrir Conta");
+            Console.WriteLine("2. Ver Saldo");
+            Console.WriteLine("3. Depositar");
+            Console.WriteLine("4. Sacar");
+            Console.WriteLine("5. Transferir entre Contas");
+            Console.WriteLine("6. Calcular Juros");
+            Console.WriteLine("9. Sair");
 
             var choice = Console.ReadLine();
 
@@ -46,19 +46,19 @@ public class UserInterface
             }
             else
             {
-                Console.WriteLine("Invalid choice, please try again.");
+                Console.WriteLine("Opção inválida, tente novamente.");
             }
         }
     }
 
     private void ExecuteWithAccount(Action<Account> accountAction)
     {
-        Console.Write("Enter Account Number: ");
+        Console.Write("Informe o número da conta: ");
         var accountNumber = Console.ReadLine();
         var account = _bankOperations.GetAccountByNumber(accountNumber!);
         if (account == null)
         {
-            Console.WriteLine("Account not found.");
+            Console.WriteLine("Conta não encontrada.");
             return;
         }
         accountAction(account);
@@ -66,21 +66,21 @@ public class UserInterface
 
     private void ExecuteWithAccounts(Action<Account, Account> transferAction)
     {
-        Console.Write("Enter Source Account Number: ");
+        Console.Write("Informe o número da conta de origem: ");
         var fromAccountNumber = Console.ReadLine();
         var fromAccount = _bankOperations.GetAccountByNumber(fromAccountNumber!);
         if (fromAccount == null)
         {
-            Console.WriteLine("Source account not found.");
+            Console.WriteLine("Conta de origem não encontrada.");
             return;
         }
 
-        Console.Write("Enter Destination Account Number: ");
+        Console.Write("Informe o número da conta de destino: ");
         var toAccountNumber = Console.ReadLine();
         var toAccount = _bankOperations.GetAccountByNumber(toAccountNumber!);
         if (toAccount == null)
         {
-            Console.WriteLine("Destination account not found.");
+            Console.WriteLine("Conta de destino não encontrada.");
             return;
         }
         transferAction(fromAccount, toAccount);
@@ -88,7 +88,7 @@ public class UserInterface
 
     private void ExitApplication()
     {
-        Console.WriteLine("Thank you for using SampleBankOperations!");
+        Console.WriteLine("Obrigado por utilizar o SampleBankOperations!");
         Environment.Exit(0);
     }
 }

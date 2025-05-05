@@ -21,18 +21,18 @@ public class BankOperations : IBankOperations
 
     public void OpenAccount()
     {
-        Console.Write("Enter Account Number: ");
+        Console.Write("Informe o número da conta: ");
         var accountNumber = Console.ReadLine();
-        Console.Write("Enter Initial Balance: ");
+        Console.Write("Informe o saldo inicial: ");
         if (decimal.TryParse(Console.ReadLine(), out var initialBalance))
         {
             var account = new Account(accountNumber!, initialBalance, Core.Enums.AccountType.Checking);
             _accountRepository.Add(account);
-            _logger.Log($"Account {accountNumber} opened with balance {initialBalance:C}.");
+            _logger.Log($"Conta {accountNumber} criada com saldo de {initialBalance:C}.");
         }
         else
         {
-            Console.WriteLine("Invalid amount.");
+            Console.WriteLine("Valor inválido.");
         }
     }
 
@@ -44,64 +44,64 @@ public class BankOperations : IBankOperations
     public void ViewBalance(Account account)
     {
         var balance = _accountService.GetBalance(account);
-        Console.WriteLine($"Current balance for account {account.AccountNumber}: {balance:C}");
+        Console.WriteLine($"Saldo atual da conta {account.AccountNumber}: {balance:C}");
     }
 
     public void Deposit(Account account)
     {
-        Console.Write("Enter Deposit Amount: ");
+        Console.Write("Informe o valor para depósito: ");
         if (decimal.TryParse(Console.ReadLine(), out var amount))
         {
-            _accountService.Deposit(account, amount, amt => Console.WriteLine($"Deposited: {amt:C}"));
+            _accountService.Deposit(account, amount, amt => Console.WriteLine($"Depositado: {amt:C}"));
         }
         else
         {
-            Console.WriteLine("Invalid amount.");
+            Console.WriteLine("Valor inválido.");
         }
     }
 
     public void Withdraw(Account account)
     {
-        Console.Write("Enter Withdraw Amount: ");
+        Console.Write("Informe o valor para saque: ");
         if (decimal.TryParse(Console.ReadLine(), out var amount))
         {
             bool success = _accountService.Withdraw(account, amount, AccountValidator.MinimumBalanceValidator(0));
-            Console.WriteLine(success ? $"Withdrawn: {amount:C}" : "Insufficient balance.");
+            Console.WriteLine(success ? $"Sacado: {amount:C}" : "Saldo insuficiente.");
         }
         else
         {
-            Console.WriteLine("Invalid amount.");
+            Console.WriteLine("Valor inválido.");
         }
     }
 
     public void Transfer(Account fromAccount, Account toAccount)
     {
-        Console.Write("Enter Transfer Amount: ");
+        Console.Write("Informe o valor para transferência: ");
         if (decimal.TryParse(Console.ReadLine(), out var amount))
         {
-            bool success = _accountService.Transfer(fromAccount, toAccount, amount, 
+            bool success = _accountService.Transfer(fromAccount, toAccount, amount,
                 AccountValidator.MinimumBalanceValidator(0), AccountValidator.RequestedAmountValidator(amount));
 
-            Console.WriteLine(success ? $"Transferred: {amount:C} from {fromAccount.AccountNumber} to {toAccount.AccountNumber}" 
-                : "Transfer failed due to insufficient balance.");
+            Console.WriteLine(success ? $"Transferido: {amount:C} da conta {fromAccount.AccountNumber} para {toAccount.AccountNumber}"
+                : "Falha na transferência por saldo insuficiente.");
         }
         else
         {
-            Console.WriteLine("Invalid amount.");
+            Console.WriteLine("Valor inválido.");
         }
     }
 
     public void CalculateInterest(Account account)
     {
-        Console.Write("Enter Interest Rate (%): ");
+        Console.Write("Informe a taxa de juros (%): ");
         if (decimal.TryParse(Console.ReadLine(), out var rate))
         {
             decimal interest = _accountService.CalculateInterest(account, (balance, r) => balance * (r / 100), rate);
-            Console.WriteLine($"Calculated Interest: {interest:C}");
+            Console.WriteLine($"Juros calculado: {interest:C}");
         }
         else
         {
-            Console.WriteLine("Invalid rate.");
+            Console.WriteLine("Taxa inválida.");
         }
     }
 }
